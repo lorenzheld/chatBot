@@ -1,5 +1,7 @@
 package org.bbw.ch;
 
+import java.util.HashSet;
+
 /**
  * This class implements a technical support system. It is the top
  * level class in this project. The support system communicates via
@@ -38,12 +40,20 @@ public class SupportSystem {
 		printWelcome();
 
 		while (!finished) {
-			String input = reader.getInput();
+			String input = reader.getInput().toLowerCase();
 
 			if (input.toLowerCase().startsWith("bye")) {
 				finished = true;
 			} else {
-				String response = responder.generateResponse(input);
+
+				String[] tokens = input.split(" ");
+				HashSet<String> words = new HashSet<>();
+				for (String word : tokens) {
+					words.add(word);
+				}
+
+
+				String response = responder.generateResponse(words);
 				System.out.println(response);
 			}
 		}

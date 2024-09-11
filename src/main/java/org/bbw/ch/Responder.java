@@ -1,6 +1,7 @@
 package org.bbw.ch;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -32,6 +33,7 @@ public class Responder {
 		responseMap.put("hello", "Hello! How can I assist you today?");
 		responseMap.put("bye", "Goodbye! Have a nice day!");
 		responseMap.put("help", "I am here to help you. What do you need?");
+		responseMap.put("", "Don't be shy");
 		// Add more responses as needed
 	}
 	
@@ -40,10 +42,11 @@ public class Responder {
 	 * Generate a response.
 	 * @return   A string that should be displayed as the response
 	 */
-	public String generateResponse(String input) {
-		for (String key : responseMap.keySet()) {
-			if (input.toLowerCase().contains(key)) {
-				return responseMap.get(key);
+
+	public String generateResponse(HashSet<String> words) {
+		for (String word : words) {
+			if (responseMap.containsKey(word)) {
+				return responseMap.get(word);
 			}
 		}
 		return "That sounds interesting. Tell me more...";
